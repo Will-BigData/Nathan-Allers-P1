@@ -1,0 +1,5 @@
+[database]
+host="localhost"
+name="project1"
+username_env_var="MONGODB_API_USERNAME"
+password_env_var="MONGODB_API_PASSWORD"
