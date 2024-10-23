@@ -3,6 +3,7 @@ from getpass import getpass
 from service import UserService
 from security import hash_password
 from model import User
+from util import handle_with_message
 
 user_service = UserService()
 
@@ -30,6 +31,7 @@ def login():
                 print("Unknown input.")
     return user
 
+@handle_with_message(KeyboardInterrupt, "\nKeyboard interrupt (CTRL+C) received, exiting...")
 def main():
     user = login()
     if user is not None:
