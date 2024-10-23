@@ -1,5 +1,5 @@
 class User:
-    def __init__(self, username: str, passwordHash: str, isAdmin: bool):
+    def __init__(self, username: str, passwordHash: str, isAdmin: bool, _id=None):
         self._username = username
         self._password_hash = passwordHash
         self._is_admin = isAdmin
