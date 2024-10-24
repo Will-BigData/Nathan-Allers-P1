@@ -1,17 +1,17 @@
 from dao import UserDAO
 from model import User
-from security import verify_password
+from security import verify_password, hash_password
 
 class UserService:
     def __init__(self):
         self.user_dao = UserDAO()
     
-    def add_user(self, user: User) -> bool:
-        if self.user_dao.get_user_by_username(user.username) is not None:
-            return False
-        self.user_dao.add_user(user)
-        return True
-
+    def add_user(self, username: str, password: str) -> User | None:
+        if self.user_exists(username):
+            return None
+        self.user_dao.add_user(User(username, hash_password(password), False))
+        return self.get_user_by_username(username)
+    
     def get_user_by_username(self, username: str) -> User | None:
         return self.user_dao.get_user_by_username(username)
     

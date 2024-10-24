@@ -18,3 +18,7 @@ class UserDAO:
     def add_user(self, user: User):
         logger.info("Inserted user with username: %s", user.username)
         return self.users.insert_one(user.get_document_mapping())
+    
+    def update_user(self, user: User):
+        logger.info("Updated user with username: %s", user.username)
+        pass
