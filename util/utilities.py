@@ -47,3 +47,16 @@ def get_user_int(prompt: str, requirements: str="Invalid input.", valid_func=lam
         except ValueError:
             print("Input must be an integer.\n")
     return result
+
+def get_user_float(prompt: str, requirements: str="Invalid input.", valid_func=lambda x: True) -> float:
+    valid = False
+    result = None
+    while not valid:
+        try:
+            result = float(input(prompt))
+            valid = valid_func(result)
+            if not valid:
+                print(requirements)
+        except ValueError:
+            print("Input must be a floating point value.\n")
+    return result

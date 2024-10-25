@@ -15,10 +15,21 @@ class UserDAO:
             user = User(**user)
             return user
     
+    def get_all_users(self) -> list[User]:
+        logger.info("Found all users")
+        return [User(**user) for user in self.users.find({})]
+    
     def add_user(self, user: User):
         logger.info("Inserted user with username: %s", user.username)
         return self.users.insert_one(user.get_document_mapping())
     
     def update_user(self, user: User):
         logger.info("Updated user with username: %s", user.username)
-        pass
+        self.users.update_one({"username": user.username}, { "$set": {"passwordHash": user.password_hash, "isAdmin": user.is_admin}})
+    
+    def delete_user(self, username: str):
+        results = self.users.delete_one({"username": username})
+        if results.deleted_count == 0:
+            logger.info("Failed to delete user with username: %s", username)
+        else:
+            logger.info("Deleted user with username: %s", username)
