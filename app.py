@@ -17,7 +17,8 @@ def main():
                 break
             case _:
                 print("Unknown selection.")
-        dispatch_user(current_user)
+        if current_user is not None:
+            dispatch_user(current_user)
 
 
 if __name__ == "__main__":
